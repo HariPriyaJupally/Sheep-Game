@@ -81,12 +81,19 @@ var App = {
     }
     return length
   },
-  calculateArea: function (givenWidth, givenLength) {
-    if (typeof givenWidth !== 'number' || typeof givenLength !== 'number') {
+  calculateArea: function (givenLength, givenWidth) {
+    const MIN_VALUE = 1
+    if (typeof givenLength !== 'number' || typeof givenWidth !== 'number') {
       throw Error('The given argument is not a number')
     }
+    if  (givenLength < MIN_VALUE) {
+      givenLength = MIN_VALUE
+    }
+    if  (givenWidth < MIN_VALUE) {
+      givenWidth = MIN_VALUE
+    }
     // calculate the answer and store in a local variable so we can watch the value
-    let area = givenWidth * givenLength
+    let area =  givenLength * givenWidth
 
     // return the result of our calculation to the calling function
     return area
