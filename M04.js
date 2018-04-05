@@ -4,124 +4,119 @@
 //  The goal is provide many useful examples in a single code file. 
 //
 //  When you modify the application, use different ids for your HTML elements.
-//  Do not use length and width. 
+//  Do not use length and width unless these directly apply to your application. 
 
 var App = {
   launch: function () {
-    App.getFirstName();
-    App.getLastName();
-    App.getWidth();
-    App.getLength();
-    App.getArea();
-    App.getEstimate();
-    App.displayExploreButtons();
-    App.showExample();
+    const first = App.getFirstName()
+    const last = App.getLastName()
+    const width = App.getWidth()
+    const length = App.getLength()
+    const area = App.calculateArea(width, length)
+    const count = App.calculateEstimatedCount(area)
+
+    // update page contents 
+    $(".displayText").css('display', 'inline-block')  //overwrites display: hidden to make it visible 
+    document.getElementById("first").innerHTML = first
+    document.getElementById("last").innerHTML = last
+    document.getElementById("width").innerHTML = width
+    document.getElementById("length").innerHTML = length
+    document.getElementById("area").innerHTML = area
+    document.getElementById("count").innerHTML = count
+    document.getElementById("displayPlace").innerHTML = ""
+
+    alert("You have about " + area + " square miles.")
+    alert("You could have about " + count + " sheep.")
+    $("#count").css("color", "blue")
+    $("#count").css("background-color", "yellow")
+
+    App.showExample(count)
+    App.displayExploreButtons()
   },
   getFirstName: function () {
-    let answer = prompt("What is your first name", "Notorious");
-    if (answer != null) {
-      // document.getElementById("first").innerHTML = answer;
-      $("#first").html(answer); // $ = jQuery object; in jQuery use # with id, . with class
-    }
+    const answer = prompt("What is your first name", "Notorious")
+    return answer
   },
   getLastName: function () {
-    let answer = prompt("What is your last name", "Nora");
-    if (answer != null) {
-      //document.getElementById("last").innerHTML = answer;
-      $("#last").html(answer);  // passing in the inner html with the  jQuery html() method 
-    }
+    const answer = prompt("What is your last name", "Nora")
+    return answer
   },
   getWidth: function () {
-    let answer = prompt("What is the width of your farm in miles", 5);
-    if (answer != null) {
-      //document.getElementById("width").innerHTML = answer;
-      $('#width').html(answer);   // either double or single tick marks designate strings
+    const DEFAULT_WIDTH = 5;
+    const MAX_WIDTH = 100;
+    const MIN_WIDTH = 1;
+    const answer = prompt("What is the width of your farm in miles", DEFAULT_WIDTH)
+    let width = parseFloat(answer)
+    if (Number.isNaN(width) ) {
+      alert('The given argument is not a number. Using ' + DEFAULT_WIDTH + '.')
+      width = DEFAULT_WIDTH
+    } 
+    else if (width > MAX_WIDTH) {
+      alert('The given argument is greater than ' + MAX_WIDTH + '. Using ' + MAX_WIDTH + '.')
+      width = MAX_WIDTH
     }
+    else if (width < MIN_WIDTH) {
+      alert('The given argument is less than ' + MIN_WIDTH + '. Using ' + MIN_WIDTH + '.')
+      width = MIN_WIDTH
+    }
+    return width
   },
   getLength: function () {
-    let answer = prompt("What is the length of your farm in miles", 5);
-    if (answer != null) {
-      $('#length').html(answer);  // html method works as a getter and a setter
+    const DEFAULT_LENGTH = 5;
+    const MAX_LENGTH = 100;
+    const MIN_LENGTH = 1;
+    const answer = prompt("What is the length of your farm in miles", DEFAULT_LENGTH)
+    let length = parseFloat(answer)
+    if (Number.isNaN(length)) {
+      alert('The given argument is not a number. Using ' + DEFAULT_LENGTH + '.')
+      length = DEFAULT_LENGTH
     }
-  },
-  getArea: function () {
-    //let inputWidth = parseFloat(document.getElementById("width").innerHTML);
-    //let inputLength = parseFloat(document.getElementById("length").innerHTML);
-    //let answer = Area.calculateArea(inputWidth, inputLength); // do some checks on the inputs
-    //document.getElementById("area").innerHTML = answer;
-    let inputWidth = parseFloat($('#width').html());
-    let inputLength = parseFloat($('#length').html());
-    let answer = App.calculateArea(inputWidth, inputLength); // do some checks on the inputs
-    $("#area").html(answer);
-    $(".displayText").css('display', 'inline-block');  //overwrites display: hidden to make it visible 
-    alert("You have about " + answer + " square miles.");
+    else if (length > MAX_LENGTH) {
+      alert('The given argument is greater than ' + MAX_LENGTH + '. Using ' + MAX_LENGTH + '.')
+      length = MAX_LENGTH
+    }
+    else if (length < MIN_LENGTH) {
+      alert('The given argument is less than ' + MIN_LENGTH + '. Using ' + MIN_LENGTH + '.')
+      length = MIN_LENGTH
+    }
+    return length
   },
   calculateArea: function (givenWidth, givenLength) {
     if (typeof givenWidth !== 'number' || typeof givenLength !== 'number') {
-      throw Error('The given argument is not a number');
+      throw Error('The given argument is not a number')
     }
-
-    const minWidth = 1;
-    const minLength = 1;
-    const maxWidth = 100;
-    const maxLength = 100;
-
-    // check the first argument.................
-    let width  // undefined
-    if (givenWidth < minWidth) {
-      width = minWidth;
-    }
-    else if (givenWidth > maxWidth) {
-      width = maxWidth;
-    }
-    else {
-      width = givenWidth;
-    }
-
-    //check the second argument ...................
-    if (givenLength < minLength) {
-      length = minLength;
-    }
-    else if (givenLength > maxLength) {
-      length = maxLength;
-    }
-    else {
-      length = givenLength;
-    }
-
     // calculate the answer and store in a local variable so we can watch the value
-    let area = width * length;
+    let area = givenWidth * givenLength
+
     // return the result of our calculation to the calling function
-    return area;
+    return area
   },
-  getEstimate: function () {
-    let area = parseFloat(document.getElementById("area").innerHTML);
-    let ct;
-    if (area < 1) { ct = 0; }
-    else { ct = area }; // estimate 1 per square mile
-    document.getElementById("count").innerHTML = ct;
-    alert("You could have about " + ct + " sheep.");
-    $("#count").css("color", "blue");
-    $("#count").css("background-color", "yellow");
+  calculateEstimatedCount: function (inputArea) {
+    if (typeof inputArea !== 'number') {
+      alert('The given argument is not a number')
+    }
+    let ct = 0
+    if (inputArea > 1) {
+      ct = inputArea // estimate 1 per square mile
+    }
+    return ct
   },
-  showExample: function () {
-    document.getElementById("displayPlace").innerHTML = "";
-    let totalCount = parseFloat($("#count").html());
-    for (var i = 0; i < totalCount; i++) {
-      App.addImage(i);
+  showExample: function (inputCount) {
+    for (var i = 0; i < inputCount; i++) {
+      App.addImage(i)
     }
   },
   addImage: function (icount) {
-    var imageElement = document.createElement("img");
-    imageElement.id = "image" + icount;
-    imageElement.class = "picture";
-    imageElement.style.maxWidth = "90px";
-    var displayElement = document.getElementById("displayPlace");
-    displayElement.appendChild(imageElement);
-    document.getElementById("image" + icount).src = "59-images-of-baby-lamb-clipart-you-can-use-these-free-cliparts-for-sEfudv-clipart.jpg";
+    var imageElement = document.createElement("img")
+    imageElement.id = "image" + icount
+    imageElement.class = "picture"
+    imageElement.style.maxWidth = "90px"
+    var displayElement = document.getElementById("displayPlace")
+    displayElement.appendChild(imageElement)
+    document.getElementById("image" + icount).src = "59-images-of-baby-lamb-clipart-you-can-use-these-free-cliparts-for-sEfudv-clipart.jpg"
   },
   displayExploreButtons: function () {
-    $(".displayExploreButtons").css('display', 'block');  //overwrites display: hidden to make it visible 
+    $(".displayExploreButtons").css('display', 'block')  //overwrites display: hidden to make it visible 
   },
   exploreHtml: function () {
     alert("Would you like to learn more? \n\n Run the app in Chrome.\n\n" +
@@ -142,5 +137,5 @@ var App = {
       "Caution: Hitting F11 in VS Code will make your top-level menu disapper. Hit F11 again to bring it back.\n"
     )
   }
-};
+}
 
