@@ -26,7 +26,6 @@ var App = {
     exploreCode: exploreCode
 }
 
-
 function launch() {
     const first = getFirstName()
     const last = getLastName()
@@ -53,10 +52,11 @@ function launch() {
     showExample(count)
     displayExploreButtons()
 }
-function cleanInput(inputString){
-    
-      alert(justAlphaAnswer)
-}
+
+// function getFirstName() {
+//     const answer = prompt("What is your first name", "Notorious")
+//     return answer
+// }
 
 function getFirstName() {
     const MAX_FIRST = 25
