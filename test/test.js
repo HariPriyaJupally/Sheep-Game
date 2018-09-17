@@ -37,3 +37,11 @@ QUnit.test('Testing calculateArea function with several sets of inputs', functio
     assert.throws(function () { App.calculateArea('a', 'b'); }, /The given argument is not a number/, 'Passing in a string correctly raises an Error');
 });
 
+QUnit.test('Testing cleanString function with several sets of inputs', function (assert) {
+  assert.equal(App.cleanString('Nora<script></script>',4), 'Nora', 'Tested removal of excess characters, limit 4');
+  assert.equal(App.cleanString('NoraNora<script></script>',4), 'Nora', 'Tested removal of excess characters, limit 8');
+  assert.equal(App.cleanString('NoraNora<script></script>',10), 'NoraNorasc', 'Tags removed>');
+  assert.equal(App.cleanString('Nora;#%*@Nora<script></script>',8), 'NoraNora', 'Non-letters removed');
+});
+
+

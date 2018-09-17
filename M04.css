@@ -5,9 +5,7 @@ body {
   font-family: Verdana, sans-serif;
   font-size: large;
 }
-footer {
-  margin: 60px;
-}
+
 .displayExploreButtons {
   display: none;
   margin-top: 60px;

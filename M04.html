@@ -1,75 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>M04 Sheep Ranch</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="M04.css">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M04 Sheep Ranch</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="M04.css">
 </head>
 
-<body>
-	<!-- BootStrap navbar menu changes with the screen size-->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">M04 Sheep Ranch</a>
-				<!-- Setting the href="#" will take you to which page? -->
-			</div>
-		</div>
-	</nav>
+<body class="container-fluid">
+  <!-- BootStrap navbar menu changes with the screen size-->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">M04 Sheep Ranch</a>
+        <!-- Setting the href="#" will take you to which page? -->
+      </div>
+    </div>
+  </nav>
 
-	<!-- A BootStrap container is used to adjust the layout of the contents based on screen size. .container uses pre-built screen sizes, while .container-fluid adjusts continously.-->
-	<div class="container-fluid">
-		<!-- BootStrap grid system using one row that could have several columns (when the screen size is large enough) -->
-		<div class="row">
-			<div class="col-sm-12">
-				<p>This assignment introduces more concise code with jQuery. </p>
-				<p>The code is available at <a href="https://bitbucket.org/professorcase/m04">https://bitbucket.org/professorcase/m04</a>.</p>
-				<p>Results of the unit tests are available at <a href="test/test.html">test/test.html</a>.</p>
-				<br/>
-				<p>Currently, the application gets the user's name and the size of their ranch. The app calculates square miles and estimates
-					how many sheep they can hold on their land.</p>
-				<br/>
-				<p>Do the following:</p>
-				<ol>
-					<li>Modify at least three (and hopefully more) lines of code to use concise jQuery.</li>
-					<li>Change the application name displayed in the menu to a suitable name for your application.</li>
-					<li>DRY (don't repeat yourself) - move the shared code from first and last name to a new function called cleanInput that takes one argument, the original answer provided by the user.</li>
-				</ol>
-				<br>
-				<p>Click the button to start the app.</p>
-				<br>
-				<!-- http://v4-alpha.getbootstrap.com/components/buttons/ -->
-				<button onclick="App.launch()" class="btn btn-lg btn-danger">Click me</button> <br/> <br/>
-			</div>
-			<div class="col-sm-12">
-				<br/>
-				<span id="first"></span> <span id="last"></span><br/>
-				<span id="width"></span> <span class="displayText">x</span> <span id="length"></span> <span class="displayText">=</span>
-				<span id="area"></span> <span class="displayText">sq miles</span><br/>
-				<span class="displayText">~</span> <span id="count"> </span> <span class="displayText">sheep</span><br/>
+  <!-- A BootStrap container is used to adjust the layout of the contents based on screen size. .container uses pre-built screen sizes, while .container-fluid adjusts continously.-->
+  <div class="container-fluid">
+    <!-- BootStrap grid system using one row that could have several columns (when the screen size is large enough) -->
+    <div class="row">
+      <div class="col-sm-12">
+        <p>This assignment introduces more concise code with jQuery. </p>
+        <p>The code is available at <a href="https://bitbucket.org/professorcase/m04">https://bitbucket.org/professorcase/m04</a>.</p>
+        <p>Results of the unit tests are available at <a href="test/test.html">test/test.html</a>.</p>
+        <br />
+        <p>Currently, the application gets the user's name and the size of their ranch. The app calculates square miles
+          and estimates how many sheep they can hold on their land.</p>
+        <br />
+        <p>Do the following:</p>
+        <ol>
+          <li>Modify at least three (and hopefully more) lines of code to use concise jQuery.</li>
+          <li>Change the application name displayed in the menu to a suitable name for your application.</li>
+          <li>DRY (don't repeat yourself) - move the shared code from first and last name to a new function called
+            cleanInput that takes one argument, the original answer provided by the user.</li>
+          <li>Optional: Add another button. Call a webservice when the button is clicked and display the result. </li>
+        </ol>
+        <br>
+        <p>Click the button to start the app.</p>
+        <br>
+        <button id="btnLaunch" class="btn btn-lg btn-danger">Click me</button> <br /> <br />
+      </div>
+      <div class="col-sm-12">
+        <br />
+        <span id="first"></span> <span id="last"></span><br />
+        <span id="width"></span> <span class="displayText">x</span> <span id="length"></span> <span class="displayText">=</span>
+        <span id="area"></span> <span class="displayText">sq miles</span><br />
+        <span class="displayText">~</span> <span id="count"> </span> <span class="displayText">sheep</span><br />
 
-				<span id="displayPlace">&nbsp;</span>
-				<div class="displayExploreButtons">
-					<button onclick="App.exploreHtml()" class="btn btn-lg btn-primary" id="btnExploreHtml">Explore the HTML</button>
-					<button onclick="App.exploreCode()" class="btn btn-lg btn-primary" id="btnExploreCode">Explore the Code</button>
-				</div>
-				<div class="col-sm-12">
-					<footer>
-						<p>&copy; NWMSU Web Apps Spring 2018</p>
-					</footer>
-				</div>
-			</div>
-		</div>
-		</div>
-		<!-- /container -->
-		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="M04.js"></script>
+        <span id="displayPlace">&nbsp;</span>
+        <div class="displayExploreButtons">
+          <button class="btn btn-lg btn-primary" id="btnExploreHtml">Explore the HTML</button>
+          <button class="btn btn-lg btn-primary" id="btnExploreCode">Explore the Code</button>
+        </div>
+        <div class="col-sm-12">
+          <footer>
+            <p>&copy; NWMSU Web Apps 2018</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="M04.js"></script>
 </body>
 
 </html>
